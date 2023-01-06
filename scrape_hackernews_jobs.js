@@ -11,7 +11,10 @@ const getPage = (url) => {
 }
 
 const getTextFrom = (tag) => {
-  return document.querySelectorAll(tag).reduce((arr, item) => {arr.push(item.textContent); return arr;}, []);
+  return  Array.from(document.querySelectorAll(tag)).reduce((arr, item) => {
+    arr.push(item.textContent);
+    return arr;
+  }, []);
 } 
 
 function download(content, fileName, contentType) {
@@ -20,6 +23,11 @@ function download(content, fileName, contentType) {
     a.href = URL.createObjectURL(file);
     a.download = fileName;
     a.click();
+}
+
+function scrape_by_tag(tag, title) {
+  let arr = getTextFrom(tag);
+  download(JSON.stringify(arr), title, 'application/json');
 }
 
 function scrape_hackernews_jobs() {
