@@ -10,6 +10,9 @@ const getPage = (url) => {
   return response;
 }
 
+const getTextFrom = (tag) => {
+  return document.querySelectorAll(tag).reduce((arr, item) => {arr.push(item.textContent); return arr;}, []);
+} 
 
 function download(content, fileName, contentType) {
     var a = document.createElement("a");
